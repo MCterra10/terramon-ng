@@ -2,11 +2,11 @@
 printf "\n"
 
 if [ $(id -u) -ne 0 ]; then
-  printf "Please run as root (sudo)"
+  printf "Please run as root (sudo)\n"
   exit
 fi
 
-USAGE="\n usage: terramon-ng <start|stop> <interface> [channel or frequency]\nArguments MUST be provided in that order.\n"
+USAGE="usage: terramon-ng <start|stop> <interface> [channel or frequency]\nArguments MUST be provided in that order.\n"
 FUNCTION="$1"
 INTERFACE="$2"
 CHANFREQ="$3"

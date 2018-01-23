@@ -12,15 +12,16 @@ INTERFACE="$2"
 CHANFREQ="$3"
 
 #Checking if help requested
-if [ $FUNCTION -z ] || [ $FUNCTION == "--help" ]; then
+if [ -z $FUNCTION ] || [ ${FUNCTION:-empty} == "--help" ]; then
   printf "$USAGE"
+  exit
 fi
 
-if [ $FUNCTION == "start" ]; then
-  if [ $INTERFACE -z ]; then
+if [ ${FUNCTION:-empty} == "start" ]; then
+  if [ -z $INTERFACE ]; then
     printf "$USAGE"
   else
-    if [ $CHANFREQ -z ]; then
+    if [ -z $CHANFREQ ]; then
       ip link set $INTERFACE down > /dev/null 2>&1
       iw dev $INTERFACE set type monitor > /dev/null 2>&1
       ip link set $INTERFACE up > /dev/null 2>&1
@@ -30,11 +31,11 @@ if [ $FUNCTION == "start" ]; then
       printf "Channel/Frequency switching not yet implemented"
     fi
   fi
-elif [ $FUNCTION == "stop" ]; then
-  if [ $INTERFACE -z ]; then
+elif [ ${FUNCTION:-empty} == "stop" ]; then
+  if [ -z $INTERFACE ]; then
     printf "$USAGE"
   else
-    if [ $CHANFREQ -z ]; then
+    if [ -z $CHANFREQ ]; then
       ip link set $INTERFACE down > /dev/null 2>&1
       iw dev $INTERFACE set type managed > /dev/null 2>&1
       ip link set $INTERFACE up > /dev/null 2>&1
@@ -44,7 +45,7 @@ elif [ $FUNCTION == "stop" ]; then
       printf "Channel/Frequency switching not yet implemented"
     fi
   fi
-elif [ $FUNCTION -n ] && [ $FUNCTION != "--help" ]; then
+elif [ -n $FUNCTION ] && [ ${FUNCTION:-empty} != "--help" ]; then
   printf "$USAGE"
 fi
 

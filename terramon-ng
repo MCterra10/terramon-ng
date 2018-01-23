@@ -2,7 +2,7 @@
 printf "\n"
 
 if [ $(id -u) -ne 0 ]; then
-  printf "Please run as root (sudo)\n"
+  printf "Please run as root (sudo)\n\n"
   exit
 fi
 

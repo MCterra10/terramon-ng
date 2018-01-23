@@ -13,6 +13,11 @@ The program is very new, many features need to be added yet.
 # sudo cp terramon-ng /usr/bin
 # sudo chmod +x /usr/bin/terramon-ng
 ```
+You can then do
+```
+# terramon-ng --help
+```
+for more info
 
 ### Note:
 The "NG" is a (very bad) joke, and I am not affiliated in any way with the creators/contributers of the aircrack-ng suite.

@@ -1,7 +1,7 @@
 #!/bin/sh
 printf "\n"
 
-if [ $EUID > 0 ]; then
+if [ $(id -u) -ne 0 ]; then
   printf "Please run as root (sudo)"
   exit
 fi
@@ -12,12 +12,12 @@ INTERFACE="$2"
 CHANFREQ="$3"
 
 #Checking if help requested
-if [ -z "$FUNCTION" ] || [ "$FUNCTION" == "--help" ]; then
+if [ -z "$FUNCTION" ] || [ "$FUNCTION" = "--help" ]; then
   printf "$USAGE"
   exit
 fi
 
-if [ "$FUNCTION" == "start" ]; then
+if [ "$FUNCTION" = "start" ]; then
   if [ -z "$INTERFACE" ]; then
     printf "$USAGE"
   else
@@ -31,7 +31,7 @@ if [ "$FUNCTION" == "start" ]; then
       printf "Channel/Frequency switching not yet implemented"
     fi
   fi
-elif [ "$FUNCTION" == "stop" ]; then
+elif [ "$FUNCTION" = "stop" ]; then
   if [ -z "$INTERFACE" ]; then
     printf "$USAGE"
   else

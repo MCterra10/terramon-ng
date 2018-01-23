@@ -14,7 +14,6 @@ CHANFREQ="$3"
 #Checking if help requested
 if [ -z "$FUNCTION" ] || [ "$FUNCTION" = "--help" ]; then
   printf "$USAGE"
-  exit
 fi
 
 if [ "$FUNCTION" = "start" ]; then

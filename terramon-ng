@@ -12,7 +12,7 @@ INTERFACE="$2"
 CHANFREQ="$3"
 
 #Checking if help requested
-if [ -z $FUNCTION ] || [ ${FUNCTION:-empty} == "--help" ]; then
+if [ ${FUNCTION:-empty} == "--help" ]; then
   printf "$USAGE"
   exit
 fi

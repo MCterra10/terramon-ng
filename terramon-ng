@@ -1,20 +1,26 @@
 #!/bin/sh
 printf "\n"
+
+if [ "$EUID" -ne 0 ]
+  then printf "Please run as root (sudo)"
+  exit
+fi
+
 USAGE="\n usage: terramon-ng <start|stop> <interface> [channel or frequency]\nArguments MUST be provided in that order.\n"
 FUNCTION="$1"
 INTERFACE="$2"
 CHANFREQ="$3"
 
 #Checking if help requested
-if [ $FUNCTION -z ] || [ $FUNCTION -eq "--help" ]
+if [ $FUNCTION -z ] || [ $FUNCTION -eq "--help" ]; then
   printf "$USAGE"
 fi
 
-if [ $FUNCTION -eq "start" ]
-  if [ $INTERFACE -z ]
+if [ $FUNCTION -eq "start" ]; then
+  if [ $INTERFACE -z ]; then
     printf "$USAGE"
   else
-    if [ $CHANFREQ -z ]
+    if [ $CHANFREQ -z ]; then
       ip link set $INTERFACE down > /dev/null 2>&1
       iw dev $INTERFACE set type monitor > /dev/null 2>&1
       ip link set $INTERFACE up > /dev/null 2>&1
@@ -24,11 +30,11 @@ if [ $FUNCTION -eq "start" ]
       printf "Channel/Frequency switching not yet implemented"
     fi
   fi
-elif [ $FUNCTION -eq "stop" ]
-  if [ $INTERFACE -z ]
+elif [ $FUNCTION -eq "stop" ]; then
+  if [ $INTERFACE -z ]; then
     printf "$USAGE"
   else
-    if [ $CHANFREQ -z ]
+    if [ $CHANFREQ -z ]; then
       ip link set $INTERFACE down > /dev/null 2>&1
       iw dev $INTERFACE set type managed > /dev/null 2>&1
       ip link set $INTERFACE up > /dev/null 2>&1

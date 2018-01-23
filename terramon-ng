@@ -44,7 +44,7 @@ elif [ ${FUNCTION:-0} = "stop" ]; then
       printf "Channel/Frequency switching not yet implemented"
     fi
   fi
-elif [ ${FUNCTION:-0} -n ] && [ ${FUNCTION:-0} != "--help" ]; then
+elif [ $FUNCTION -n ] && [ ${FUNCTION:-0} != "--help" ]; then
   printf "$USAGE"
 fi
 
